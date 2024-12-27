@@ -309,8 +309,8 @@
                 </div>
                 <div class="portfolio-detail">
                     <p class="numb">03</p>
-                    <h3>Naaz LPG Gass</h3>
-                    <p>The Gass application is a user-friendly platform designed for seamless gas stove refilling, cylinder purchases, and stove shopping. Built with a focus on convenience and efficiency, the app offers features like easy Gas Refilling requests with real-time tracking, a Cylinder Marketplace for purchasing gas cylinders, and a Stove Shopping section showcasing a range of products. Users can also manage orders, receive notifications on delivery updates, and access customer support for queries. With a sleek UI and intuitive navigation, the Gass app simplifies the process of managing household gas needs, ensuring a hassle-free experience.</p>
+                    <h3>Naaz LPG Gas</h3>
+                    <p>The Gas application is a user-friendly platform designed for seamless gas stove refilling, cylinder purchases, and stove shopping. Built with a focus on convenience and efficiency, the app offers features like easy Gas Refilling requests with real-time tracking, a Cylinder Marketplace for purchasing gas cylinders, and a Stove Shopping section showcasing a range of products. Users can also manage orders, receive notifications on delivery updates, and access customer support for queries. With a sleek UI and intuitive navigation, the Gas app simplifies the process of managing household gas needs, ensuring a hassle-free experience.</p>
                     <div class="tech">
                         <p>Flutter, Firebase</p>
                     </div>
@@ -401,23 +401,42 @@
                 </div>
             </div>
             <div class="contact-box">
-                <form action="">
+                <form name="submit-to-google-sheet">
                     <h2 class="heading">Contact <span>Me!</span></h2>
                     <div class="field-box">
-                        <input type="text" placeholder="Full Name" required>
-                        <input type="email" placeholder="Email Address" required>
-                        <input type="text" placeholder="Phone Number" required>
-                        <input type="text" placeholder="Email Subject" required>
-                        <textarea name="" id="" placeholder="Your Message" required></textarea>
+                        <input type="text" name="Name" placeholder="Full Name" required>
+                        <input type="email" name="Email" placeholder="Email Address" required>
+                        <input type="text" name="Phone" placeholder="Phone Number" required>
+                        <input type="text" name="Email Subject" placeholder="Email Subject" required>
+                        <textarea name="Message" id="" placeholder="Your Message" required></textarea>
                     </div>
                     <button type="submit" class="btn">Send Message</button>
                 </form>
+                <span id="msg"></span>
             </div>
         </div>
     </section>
 
     <!-- custom js -->
     <script src="js/script.js"></script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx8Ebv3c0_gLzVzS5j__i7vbJmDeg4ZDJlbUhIHA5GufE-tvHXFxtpw6qYj758I4kZLHQ/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message Sent Successfully!"
+                setTimeout(function() {
+                    msg.innerHTML = ""
+                },5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 </body>
 
 </html>

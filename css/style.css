@@ -777,6 +777,14 @@ section.active {
     cursor: pointer;
 }
 
+
+#msg {
+    color:var(--main-color);
+    margin-top: 15px;
+    display: block;
+    font-size: 2rem;
+}
+
 @media screen and (max-width: 1200px) {
     html {
         font-size: 55%;
